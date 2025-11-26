@@ -735,21 +735,21 @@ KBUILD_CFLAGS   += -O3
 endif
 endif
 
-# Optimize for SDM845
-ifdef CONFIG_ARCH_SDM845
+# Optimize for SM8150 (Snapdragon 855)
+ifdef CONFIG_ARCH_SM8150
   ifeq ($(cc-name),clang)
-    KBUILD_CFLAGS += -mcpu=cortex-a55 \
-                     -mtune=cortex-a55 \
+    KBUILD_CFLAGS += -mcpu=cortex-a76 \
+                     -mtune=cortex-a76 \
                      -march=armv8.2-a+crc+crypto+fp16+dotprod+rcpc
-    KBUILD_AFLAGS += -mcpu=cortex-a55 \
-                     -mtune=cortex-a55 \
+    KBUILD_AFLAGS += -mcpu=cortex-a76 \
+                     -mtune=cortex-a76 \
                      -march=armv8.2-a+crc+crypto+fp16+dotprod+rcpc
   else ifeq ($(cc-name),gcc)
-    KBUILD_CFLAGS += -mcpu=cortex-a75.cortex-a55 \
-                     -mtune=cortex-a75.cortex-a55 \
+    KBUILD_CFLAGS += -mcpu=cortex-a76.cortex-a55 \
+                     -mtune=cortex-a76.cortex-a55 \
                      -march=armv8.2-a+crc+crypto+fp16+dotprod+rcpc
-    KBUILD_AFLAGS += -mcpu=cortex-a75.cortex-a55 \
-                     -mtune=cortex-a75.cortex-a55 \
+    KBUILD_AFLAGS += -mcpu=cortex-a76.cortex-a55 \
+                     -mtune=cortex-a76.cortex-a55 \
                      -march=armv8.2-a+crc+crypto+fp16+dotprod+rcpc
   endif
 endif
