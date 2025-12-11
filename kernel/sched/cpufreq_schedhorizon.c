@@ -19,11 +19,11 @@
 
 #include <linux/cpufreq.h>
 #include <linux/kthread.h>
+#include <uapi/linux/sched/types.h>
 #include <linux/slab.h>
 #include <trace/events/power.h>
 #include <linux/sched/sysctl.h>
 #include "sched.h"
-#include "tune.h"
 
 /* Define default efficient_freq and up_delay */
 static unsigned int default_efficient_freq_little[] = {0};
