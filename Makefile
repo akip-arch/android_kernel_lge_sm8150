@@ -757,14 +757,16 @@ ifdef CONFIG_ARCH_SM8150
                      -O3 \
                      -mllvm -hot-cold-split=true \
                      -mllvm -regalloc-enable-advisor=release \
-                     -mllvm -enable-ml-inliner=release
+                     -mllvm -enable-ml-inliner=release \
+                     -mllvm -misched-enable=ml
 
     KBUILD_AFLAGS += -mcpu=cortex-a76 \
                      -mtune=cortex-a76 \
                      -march=armv8.2-a+crc+crypto+fp16+dotprod+rcpc \
                      -O3 \
                      -mllvm -regalloc-enable-advisor=release \
-                     -mllvm -enable-ml-inliner=release
+                     -mllvm -enable-ml-inliner=release \
+                     -mllvm -misched-enable=ml
 
   else ifeq ($(cc-name),gcc)
     KBUILD_CFLAGS += -mcpu=cortex-a76.cortex-a55 \
