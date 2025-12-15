@@ -753,22 +753,34 @@ ifdef CONFIG_ARCH_SM8150
   ifeq ($(cc-name),clang)
     KBUILD_CFLAGS += -mcpu=cortex-a76 \
                      -mtune=cortex-a76 \
-                     -march=armv8.2-a+crc+crypto+fp16+dotprod+rcpc
+                     -march=armv8.2-a+crc+crypto+fp16+dotprod+rcpc \
+                     -O3 \
+                     -mllvm -hot-cold-split=true \
+                     -mllvm -regalloc-enable-advisor=release \
+                     -mllvm -enable-ml-inliner=release
+
     KBUILD_AFLAGS += -mcpu=cortex-a76 \
                      -mtune=cortex-a76 \
-                     -march=armv8.2-a+crc+crypto+fp16+dotprod+rcpc
+                     -march=armv8.2-a+crc+crypto+fp16+dotprod+rcpc \
+                     -O3 \
+                     -mllvm -regalloc-enable-advisor=release \
+                     -mllvm -enable-ml-inliner=release
+
   else ifeq ($(cc-name),gcc)
     KBUILD_CFLAGS += -mcpu=cortex-a76.cortex-a55 \
                      -mtune=cortex-a76.cortex-a55 \
-                     -march=armv8.2-a+crc+crypto+fp16+dotprod+rcpc
+                     -march=armv8.2-a+crc+crypto+fp16+dotprod+rcpc \
+                     -O3
     KBUILD_AFLAGS += -mcpu=cortex-a76.cortex-a55 \
                      -mtune=cortex-a76.cortex-a55 \
-                     -march=armv8.2-a+crc+crypto+fp16+dotprod+rcpc
+                     -march=armv8.2-a+crc+crypto+fp16+dotprod+rcpc \
+                     -O3
   endif
 endif
 
+# Enable Werror if CONFIG_CC_WERROR is set
 ifdef CONFIG_CC_WERROR
-KBUILD_CFLAGS	+= -Werror
+  KBUILD_CFLAGS += -Werror
 endif
 
 # Tell gcc to never replace conditional load with a non-conditional one
