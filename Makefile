@@ -759,10 +759,19 @@ ifdef CONFIG_ARCH_SM8150
                      -mllvm -regalloc-enable-advisor=release \
                      -mllvm -enable-ml-inliner=release
 
+   KBUILD_LDFLAGS += -mcpu=cortex-a76 \
+                     -mtune=cortex-a76 \
+                     -march=armv8.2-a+crc+crypto+fp16+dotprod+rcpc \
+                     -O3 \
+                     -mllvm -hot-cold-split=true \
+                     -mllvm -regalloc-enable-advisor=release \
+                     -mllvm -enable-ml-inliner=release
+
     KBUILD_AFLAGS += -mcpu=cortex-a76 \
                      -mtune=cortex-a76 \
                      -march=armv8.2-a+crc+crypto+fp16+dotprod+rcpc \
                      -O3 \
+                     -mllvm -hot-cold-split=true \
                      -mllvm -regalloc-enable-advisor=release \
                      -mllvm -enable-ml-inliner=release
 
@@ -770,7 +779,8 @@ ifdef CONFIG_ARCH_SM8150
     KBUILD_CFLAGS += -mcpu=cortex-a76.cortex-a55 \
                      -mtune=cortex-a76.cortex-a55 \
                      -march=armv8.2-a+crc+crypto+fp16+dotprod+rcpc \
-                     -O3
+                     -O3 
+
     KBUILD_AFLAGS += -mcpu=cortex-a76.cortex-a55 \
                      -mtune=cortex-a76.cortex-a55 \
                      -march=armv8.2-a+crc+crypto+fp16+dotprod+rcpc \
