@@ -1,10 +1,20 @@
 name: build
 on:
-  push:
-    branches: [ "ltofix" ]
-  pull_request:
-    branches: [ "ltofix" ]
   workflow_dispatch:
+    inputs:
+      KERNEL_SOURCE:
+        description: 'Kernel source URL'
+        required: true
+        default: 'https://github.com/akip-arch/android_kernel_lge_sm8150.git'
+      KERNEL_BRANCH:
+        description: 'Kernel branch'
+        required: true
+        default: 'ltofix'
+      KERNEL_NAME:
+        description: 'Kernel/zip name'
+        required: true
+        default: 'LTOtrue'
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -29,6 +39,11 @@ jobs:
             mkdir clang && curl https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/refs/heads/main/clang-r547379.tar.gz -RLO && tar -C clang/ -xf clang-*.tar.gz
             git clone --depth=1 https://github.com/LineageOS/android_prebuilts_gcc_linux-x86_aarch64_aarch64-linux-android-4.9 gcc64
             git clone --depth=1 https://github.com/LineageOS/android_prebuilts_gcc_linux-x86_arm_arm-linux-androideabi-4.9 gcc32
+          
+    - name: Cloning Kernel Source
+      run: |
+            git clone --single-branch --depth=1 --no-tags ${{ github.event.inputs.KERNEL_SOURCE }} -b ${{ github.event.inputs.KERNEL_BRANCH }} ${{ github.workspace }}/kernel
+            echo "COMMIT_ID=$(git rev-parse HEAD)" >> $GITHUB_ENV
                                     
     - name: Fetch KsuNext
       run: |
