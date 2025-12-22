@@ -758,12 +758,10 @@ ifdef CONFIG_ARCH_SM8150
                      -mtune=cortex-a76 \
                      -march=armv8.2-a+crc+crypto+fp16+dotprod+rcpc
   else ifeq ($(cc-name),gcc)
-    KBUILD_CFLAGS += -mcpu=cortex-a76.cortex-a55 \
-                     -mtune=cortex-a76.cortex-a55 \
-                     -march=armv8.2-a+crc+crypto+fp16+dotprod+rcpc
-    KBUILD_AFLAGS += -mcpu=cortex-a76.cortex-a55 \
-                     -mtune=cortex-a76.cortex-a55 \
-                     -march=armv8.2-a+crc+crypto+fp16+dotprod+rcpc
+    KBUILD_CFLAGS += -mcpu=cortex-a55 \
+                     -mtune=cortex-a55 \
+    KBUILD_AFLAGS += -mcpu=cortex-a55 \
+                     -mtune=cortex-a55 \
   endif
 endif
 
