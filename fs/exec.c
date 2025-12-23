@@ -132,7 +132,6 @@ bool path_noexec(const struct path *path)
 SYSCALL_DEFINE1(uselib, const char __user *, library)
 {
 	struct linux_binfmt *fmt;
-	struct file *file;
 	struct filename *tmp = getname(library);
 	int error = PTR_ERR(tmp);
 	static const struct open_flags uselib_flags = {
