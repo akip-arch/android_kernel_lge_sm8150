@@ -1758,7 +1758,6 @@ static int __do_execve_file(int fd, struct filename *filename,
 {
 	char *pathbuf = NULL;
 	struct linux_binprm *bprm;
-	struct file *file;
 	struct files_struct *displaced;
 	int retval;
 
