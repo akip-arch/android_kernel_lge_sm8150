@@ -849,6 +849,7 @@ EXPORT_SYMBOL(transfer_args_to_stack);
 
 static struct file *do_open_execat(int fd, struct filename *name, int flags)
 {
+	struct file *file;
 	int err;
 	struct open_flags open_exec_flags = {
 		.open_flag = O_LARGEFILE | O_RDONLY | __FMODE_EXEC,
@@ -986,6 +987,7 @@ EXPORT_SYMBOL_GPL(kernel_read_file);
 int kernel_read_file_from_path(const char *path, void **buf, loff_t *size,
 			       loff_t max_size, enum kernel_read_file_id id)
 {
+	struct file *file;
 	int ret;
 
 	if (!path || !*path)
