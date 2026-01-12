@@ -129,6 +129,7 @@ bool path_noexec(const struct path *path)
 SYSCALL_DEFINE1(uselib, const char __user *, library)
 {
 	struct linux_binfmt *fmt;
+	struct file *file;
 	struct filename *tmp = getname(library);
 	int error = PTR_ERR(tmp);
 	static const struct open_flags uselib_flags = {
@@ -848,7 +849,6 @@ EXPORT_SYMBOL(transfer_args_to_stack);
 
 static struct file *do_open_execat(int fd, struct filename *name, int flags)
 {
-	struct file *file;
 	int err;
 	struct open_flags open_exec_flags = {
 		.open_flag = O_LARGEFILE | O_RDONLY | __FMODE_EXEC,
@@ -986,7 +986,6 @@ EXPORT_SYMBOL_GPL(kernel_read_file);
 int kernel_read_file_from_path(const char *path, void **buf, loff_t *size,
 			       loff_t max_size, enum kernel_read_file_id id)
 {
-	struct file *file;
 	int ret;
 
 	if (!path || !*path)
